@@ -18,6 +18,6 @@ public class OrreryApp extends DrawApplication {
     protected void createTools(JPanel palette){
         super.createTools(palette);
         Tool tool = new CreationTool(view(), new PlanetFigure());
-        palette.add(createToolButton("ELLIPSE", "Draw planet", tool));
+        palette.add(createToolButton( IMAGES + "ELLIPSE", "Draw planet", tool));
     }
 }
