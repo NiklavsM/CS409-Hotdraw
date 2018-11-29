@@ -1,18 +1,12 @@
 package orerry;
 
-import CH.ifa.draw.connector.ChopEllipseConnector;
-import CH.ifa.draw.figure.AbstractFigure;
-import CH.ifa.draw.figure.AttributeFigure;
-import CH.ifa.draw.figure.CompositeFigure;
 import CH.ifa.draw.figure.EllipseFigure;
-import CH.ifa.draw.framework.Connector;
 import CH.ifa.draw.framework.Handle;
 import CH.ifa.draw.handle.BoxHandleKit;
-import CH.ifa.draw.storable.StorableInput;
-import CH.ifa.draw.storable.StorableOutput;
+import CH.ifa.draw.handle.ConnectionHandle;
+import CH.ifa.draw.locator.RelativeLocator;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.Vector;
 
 public class PlanetFigure extends EllipseFigure {
@@ -27,8 +21,11 @@ public class PlanetFigure extends EllipseFigure {
     }
 
     public Vector<Handle> handles() {
-        Vector<Handle> handles = new Vector<Handle>();
+        Vector<Handle> handles = new Vector<>();
         handles.add(BoxHandleKit.southEast(this));
+        handles.addElement(new ConnectionHandle(this, RelativeLocator.east(),
+                new GravityConnection())
+        );
         return handles;
     }
 
@@ -44,16 +41,14 @@ public class PlanetFigure extends EllipseFigure {
     }
 
     // Override AttributeFigure getFillColour()
-    public Color getFillColor(){
+    public Color getFillColor() {
         Rectangle rect = displayBox();
         int size = Math.max(rect.width, rect.height);
-        if(size <= 40) {
+        if (size <= 40) {
             return Color.white;
-        }
-        else if(size <= 80){
+        } else if (size <= 80) {
             return Color.green;
-        }
-        else
+        } else
             return Color.red;
     }
 
